@@ -99,10 +99,10 @@ public class MaestroController {
         if(s != null) {
        	
         	if(s.getEstatus().equals(CON_BOLETO)) {
-        		result.rejectValue("cveServidorPublico", null, "Servidor publico ya tiene boleto asignado");
+        		result.rejectValue("cveServidorPublico", null, "Profesor(a), le informamos que sus datos ya han sido registrados con éxito anteriormente");
         		return modelAndView;
         	}else if(s.getEstatus().equals(POR_VALIDAR)) {
-        		result.rejectValue("cveServidorPublico", null, "Servidor publico, en necesario esperar la validación de tu información");
+        		result.rejectValue("cveServidorPublico", null, "Profesor(a), es necesario esperar la validación de su información");
         		return modelAndView;
         	}else if(s.getEstatus().equals(REGISTRADO)) {
         		modelAndView.setViewName("capturasinreg");
