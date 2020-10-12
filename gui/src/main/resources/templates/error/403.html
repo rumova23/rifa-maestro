@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portal de Rifa-</title>
+<meta name="description" content="Portal de rifa para empresa X" />
+<meta name="author" content="Ruben" />
+<div th:replace="fragments/menu :: menu-css"></div>
+</head>
+
+<body class="front">
+	<div id="main" class="ng-scope	">
+		<div id="container">
+			<nav id="mainNav" class="navbar navbar-default ">
+				<div th:replace="fragments/menu :: menu" />
+			</nav>
+			<div class="container-fluid">
+				
+				<div class="col-md-12 col-xs-12 col-sm-12 post-item ng-scope"	ng-repeat-start="post in posts">
+					<div class="inner" align="center" style="width: 100%">
+						<h2 id="homeHeading" th:text="'Portal de Consulta de Vales de Medicamentos' " />
+						<hr class="red"></hr>
+						<br>
+						<h2>403 - Acceso denegado</h1>
+					        <div th:inline="text">Usuario '[[${#httpServletRequest.remoteUser}]]', 
+					                No tienes permisos para ver esta pagina .
+					        </div>
+					        <br><br> 
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div th:replace="fragments/footer :: footer" />
+	</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+ 
+<body>
+	
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div th:fragment="menu">
+    	
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		      <a class="navbar-brand" href="#"><img alt="" src="img/logosindicato.png" width="220px" height="70px"></a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="navbar-toggler-icon"></span>
+		      </button>
+		      <div class="collapse navbar-collapse" id="navbarCollapse">
+		        <ul class="nav navbar-nav navbar-right">
+		          <li class="nav-item active">
+		            <a class="nav-link"  href="#" th:href="@{/home}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Home<span class="sr-only"></span></a>
+		          </li>
+		          <li class="nav-item active">
+		            <a class="nav-link"  href="#" th:href="@{/configura}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Configura<span class="sr-only"></span></a>
+		          </li>
+		          <li class="nav-item active">
+		            <a class="nav-link"  href="#" th:href="@{/reporte}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Reporte<span class="sr-only"></span></a>
+		          </li>
+		          <li class="nav-item active">
+		            <a class="nav-link"  href="#" th:href="@{/descarga}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Descarga<span class="sr-only"></span></a>
+		          </li>
+		          <li class="nav-item" >
+						<a class="nav-link"  href="/logout" th:href="@{/logout}"> <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Salir</a>
+					</li>
+		        </ul>
+		     
+		      </div>
+    </nav>
+        </div>
+        </div>
+    </nav>
+    
+	
+    
+    </body>
+</html>

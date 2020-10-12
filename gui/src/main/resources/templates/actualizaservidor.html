@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	th:href="@{webjars/datatables/1.10.19/css/jquery.dataTables.min.css}"
+	rel="stylesheet" type="text/css">
+<!-- link th:href="@{webjars/bootstrap/3.3.7/css/bootstrap.css}" rel="stylesheet" type="text/css"> -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<title>Dia del Maestro</title>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+html, body {
+	color: white;
+	font-family: 'Opens Sans', helvetica;
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+}
+
+.portada {
+	background: url(img/maestros2.jpg) no-repeat fixed center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+
+.text {
+	margin: 30px 0px 30px 0px;
+	padding: 10px;
+	background: rgba(0, 0, 0, 0.5);
+	display: inline-block;
+}
+</style>
+<script>
+	function myFunction(pag) {
+		form.pagina.value = pag;
+	}
+
+	function descargaArchivo(des) {
+		
+		if (des == 'Descargar')
+			form.descarga.value = 1;
+		else
+			form.descarga.value = 0;
+	}
+</script>
+
+</head>
+<body class="portada">
+	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+		<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+				<div>
+					<a class="navbar-brand" href="#"><img alt=""
+						src="img/logosindicato.png" width="220px" height="70px"></a>
+				</div>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarCollapse" aria-controls="navbarCollapse"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="nav navbar-nav navbar-right">
+				</div>
+				<div>
+					<a class="navbar-brand" href="#"><img alt=""
+						src="img/arbol.png" width="80px" height="70px"></a>
+				</div>
+			</nav>
+		</div>
+	</nav>
+		</div>
+	</nav>
+	<nav id="mainNav2" class="navbar navbar-default "
+		th:if="${#authorization.expression('isAuthenticated()')}">
+		<div th:replace="fragments/menu :: menu"></div>
+	</nav>
+	</br>
+	</br>
+
+	</br>
+	<div class="container">
+		<div class="container-fluid text">
+			<h1 id="homeHeading" th:text="'Actualizacion de datos Servidor Público' " style="font: bold;" />
+			
+				
+					<form  th:action="@{/actualizaservidor}"  th:object="${user}" method="post" >
+						<div class="row">
+							<div class="col">
+								<label for="cveServidorPublico" class="control-label">Clave
+									de servidor publico</label> <input id="cveServidorPublico"
+									class="form-control" th:field="*{cveServidorPublico}"
+									readonly="readonly" />
+							</div>
+							<div class="col">
+								<label for="nombreCompleto" class="control-label">Nombre</label> <input
+									id="nombreCompleto" class="form-control"
+									th:field="*{nombreCompleto}"  />
+							</div>
+							<div class="col">
+								<label for="email" class="control-label">Correo
+									electronico</label> <input id="email" class="form-control"
+									th:field="*{email}"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<label for="telefono" class="control-label">Numero
+									Telefonico</label> <input id="telefono" class="form-control"
+									th:field="*{telefono}" readonly="readonly"/>
+							</div>
+							<div class="col">
+								<label for="idRegion" class="control-label">Region</label> <input
+									id="idRegion" class="form-control" th:field="*{idRegion}"
+									readonly="readonly" />
+							</div>
+							<div class="col">
+								<label for="zonaEscolar" class="control-label">Zona
+									Escolar</label> <input id="zonaEscolar" class="form-control"
+									th:field="*{zonaEscolar}" readonly="readonly"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<label for="estatus">Estatus:</label> <select 
+									th:field="*{estatus}" class="form-control" id="sel1" required="required">
+									<option value="" selected="selected"></option>
+									<option value="4">Validado</option>
+									<option value="6">Bloqueado</option>
+									<option value="7">Eliminado</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class = row>
+							<div class="col">
+								<button type="submit" value="Actualizar" class="btn btn-success">Actualiza</button>
+							</div>
+						</div>
+					</form>
+				
+			
+	
+		</div>
+	</div>
+	</br>
+	</br>
+	</br>
+	<div th:fragment="footer">
+		<div class="panel-footer">
+			<footer>
+				<img alt="" src="img/footer.jpg" width="100%" height="80px">
+			</footer>
+		</div>
+		<script type="text/javascript"
+			th:src="@{webjars/jquery/3.4.1/jquery.min.js}"></script>
+		<script type="text/javascript"
+			th:src="@{webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+		<script type="text/javascript"
+			th:src="@{webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</div>
+</body>
+</html>

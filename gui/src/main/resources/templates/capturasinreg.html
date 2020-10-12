@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"  rel="stylesheet" type="text/css">
+		<link th:href="@{webjars/datatables/1.10.19/css/jquery.dataTables.min.css}"  rel="stylesheet" type="text/css">
+		<!-- link th:href="@{webjars/bootstrap/3.3.7/css/bootstrap.css}" rel="stylesheet" type="text/css"> -->
+		<link href="css/bootstrap.min.css"  rel="stylesheet" type="text/css">
+		
+		
+		<script type="text/javascript" th:src="@{webjars/jquery/3.4.1/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+		<script type="text/javascript" th:src="@{webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+		<script src="js/bootstrap.min.js"></script>
+		
+		<script>
+
+	
+	function myFunction() {
+		document.getElementById("pagino").value = 1;
+	}
+
+</script>
+		
+		
+		<style>
+    .ui-controlgroup-vertical {
+      width: 150px;
+    }
+    .ui-controlgroup.ui-controlgroup-vertical > button.ui-button,
+    .ui-controlgroup.ui-controlgroup-vertical > .ui-controlgroup-label {
+      text-align: center;
+    }
+    #car-type-button {
+      width: 120px;
+    }
+    .ui-controlgroup-horizontal .ui-spinner-input {
+      width: 20px;
+    }
+  </style>
+  
+	
+<title>Dia del Maestro</title>
+<style type="text/css">
+	
+	@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+	 
+	html,body{
+	  color:white;
+	  font-family:'Opens Sans',helvetica;  
+	  height:100%;
+	  width:100%;
+	  margin: 0px;
+	}
+	 
+	.portada{
+	   background: url(img/maestros2.jpg) no-repeat fixed center;
+	   -webkit-background-size: cover;
+	   -moz-background-size: cover;
+	   -o-background-size: cover;
+	   background-size: cover;
+	   height: 100%;
+	   width: 100% ;
+	   text-align: center;
+	 
+	}
+	.text{
+	  margin: 30px 0px 30px 0px;	
+	  padding: 10px;
+	  background: rgba(0,0,0,0.5);
+	  display: inline-block;
+	}
+	</style>
+</head>
+<body class="portada">
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+				<div>
+					<a class="navbar-brand" href="#"><img alt=""
+						src="img/logosindicato.png" width="220px" height="70px"></a>
+				</div>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarCollapse" aria-controls="navbarCollapse"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="nav navbar-nav navbar-right">
+				</div>
+				<div>
+					<a class="navbar-brand" href="#"><img alt=""
+						src="img/arbol.png" width="80px" height="70px"></a>
+				</div>
+			</nav>
+		</div>
+	</nav>
+    </br>
+	</br>
+</br></br></br></br></br>
+	<div class="container">
+		<div class="row">
+			<div class="text col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<form  th:action="@{/capturasinreg}" th:object="${user}" method="post">
+					<input type="hidden" th:field="*{pagino}" id="pagino"  name="pagino">
+					<h1>RIFA DEL DÍA DEL MAESTRO</h1>
+					<div class="form-group"	>
+						<label for="cveServidorPublico" class="control-label">Clave de servidor publico</label> 
+						<input	id="cveServidorPublico" class="form-control" th:field="*{cveServidorPublico}" readonly="readonly"/>
+					</div>
+					<div class="form-group"	>
+						<label for="nombreCompleto" class="control-label">Nombre</label> 
+						<input	id="nombreCompleto" class="form-control" th:field="*{nombreCompleto}" required/>
+					</div>
+					<div class="form-group"	>
+						<label for="email" class="control-label">Correo electronico</label> 
+						<input	id="email" class="form-control" th:field="*{email}" readonly="readonly"/>
+					</div>
+					<div class="form-group"	>
+						<label for="telefono" class="control-label">Numero Telefonico</label> 
+						<input	id="telefono" class="form-control" th:field="*{telefono}"  readonly="readonly"/>
+					</div>
+					<div class="form-group"	>
+						<label for="idRegion" class="control-label">Region</label> 
+						<select id="idRegion"  th:field="*{idRegion}" class="form-control" required onchange="this.form.submit()">
+							<option value="" selected="selected">Selecciona una opción</option>
+						    <option th:each="item:${regiones}" th:value="${item.idCatalogo}" th:text="${item.descripcion}"/>
+						</select>
+					</div>
+					<div class="form-group"	>
+						<label for="zonaEscolar" class="control-label">Zona Escolar</label> 
+						
+						<select id="zonaEscolar"  th:field="*{zonaEscolar}" class="form-control" required >
+							<option value="" selected="selected">Selecciona una opción</option>
+						    <option th:each="item:${zonasEscolares}" th:value="${item.idSubCatalogo}" th:text="${item.descripcion}"/>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-success" onclick="myFunction()">Almacena informacion</button>
+				</form>
+			</div>
+			
+			</div>
+		</div>
+	</div>
+</br></br></br>
+	<div th:fragment="footer">
+	    <div class="panel-footer" >
+	        <footer>
+	        	<img alt="" src="img/footer.jpg" width="100%" height="80px">
+	    	</footer>
+	    </div>
+		
+	</div>
+</body>
+</html>

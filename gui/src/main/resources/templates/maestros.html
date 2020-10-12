@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link th:href="@{webjars/jquery-ui/1.12.1/jquery-ui.min.css}"
+	rel="stylesheet" type="text/css">
+<link
+	th:href="@{webjars/datatables/1.10.19/css/jquery.dataTables.min.css}"
+	rel="stylesheet" type="text/css">
+<!-- link th:href="@{webjars/bootstrap/3.3.7/css/bootstrap.css}" rel="stylesheet" type="text/css"> -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<title>Dia del Maestro</title>
+<style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+.inline {
+	display: inline;
+}
+
+html, body {
+	color: white;
+	font-family: 'Opens Sans', helvetica;
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+}
+
+.portada {
+	background: url(img/maestros2.jpg) no-repeat fixed center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	padding-bottom: 80px;
+	background-size: cover;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	margin: 0px 0px 80px 0px;
+}
+
+.text {
+	margin: 30px 0px 30px 0px;
+	padding: 10px;
+	background: rgba(0, 0, 0, 0.5);
+	display: inline-block;
+}
+
+.izq {
+	padding-left: 10px;
+	padding-top: 10px;
+	margin-left: 10px;
+	float: left;
+	position: relative;
+	width: 60%;
+	border: steelblue solid 0px;
+	height: auto;
+}
+
+.der {
+	padding-left: 10px;
+	padding-top: 250px;
+	margin-left: 10px;
+	position: relative;
+	float: left;
+	width: 35%;
+	border: steelblue solid 0px;
+	height: auto;
+}
+
+.izqtit {
+	padding-left: 5px;
+	padding-top: 5px;
+	margin-left: 5px;
+	float: left;
+	position: relative;
+	width: 30%;
+	border: steelblue solid 0px;
+	height: auto;
+}
+
+.dertit {
+	padding-left: 5px;
+	padding-top: 5px;
+	margin-left: 5px;
+	position: relative;
+	float: left;
+	width: 30%;
+	border: steelblue solid 0px;
+	height: auto;
+}
+
+.pie_pagina {
+	width: 100%;
+	clear: both;
+	position: fixed;
+	bottom: 0;
+}
+</style>
+
+</head>
+<body class="portada">
+	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+				<div>
+					<a class="navbar-brand" href="#"><img alt=""
+						src="img/logosindicato.png" width="220px" height="70px"></a>
+				</div>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarCollapse" aria-controls="navbarCollapse"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="nav navbar-nav navbar-right">
+				</div>
+				<div>
+					<a class="navbar-brand" href="#"><img alt=""
+						src="img/arbol.png" width="80px" height="70px"></a>
+				</div>
+			</nav>
+		</div>
+	</nav>
+	</br>
+	</br>
+	</br>
+	</br>
+	<div>
+		<div class="izq">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-3">
+						<div th:if="${param.success}">
+							<div class="alert alert-info">Has sido registrado con exito
+								en la rifa del Dia del Maestro!</div>
+						</div>
+						<div class="text">
+							<h2>
+								RIFA DEL DÍA DEL MAESTRO</br>SMSEM 2020
+							</h2>
+							<div>
+								<form th:action="@{/maestros}" th:object="${user}" method="post">
+									<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+										th:each="error : ${#fields.errors('global')}"
+										th:text="${error}">Validation error</p>
+									<div class="form-group"
+										th:classappend="${#fields.hasErrors('cveServidorPublico')}? 'has-error':''">
+										<label for="cveServidorPublico" class="control-label">Clave
+											de servidor público</label> <input id="cveServidorPublico"
+											class="form-control" th:field="*{cveServidorPublico}"
+											min="100000000" max="999999999" type="number" required
+											autofocus />
+										<p class="error-message"
+											th:each="error: ${#fields.errors('cveServidorPublico')}"
+											th:text="${error}">Validation error</p>
+									</div>
+									<div class="form-group"
+										th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+										<label for="email" class="control-label">Correo
+											electrónico</label> <input id="email" class="form-control"
+											th:field="*{email}" maxlength="45" size="45" required />
+										<p class="error-message"
+											th:each="error: ${#fields.errors('email')}"
+											th:text="${error}">Validation error</p>
+									</div>
+									<div class="form-group"
+										th:classappend="${#fields.hasErrors('telefono')}? 'has-error':''">
+										<label for="telefono" class="control-label">Número
+											telefónico</label> <input id="telefono" class="form-control"
+											th:field="*{telefono}" min="1000000000" max="9999999999"
+											type="number" required />
+										<p class="error-message"
+											th:each="error: ${#fields.errors('telefono')}"
+											th:text="${error}">Validation error</p>
+									</div>
+									<div class="form-group">
+										<button type="submit" class="btn btn-success">Obten
+											tu boleto</button>
+										<span>¿Eres Administrador del sistema? <a href="/"
+											th:href="@{/login}">Click aquí</a></span>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="der">
+			<div class="text">
+				<div>
+					<form action="/recupera" method="get">
+						<div class="form-group col-md-12">
+							<label class="control-label">¿Extraviaste tu boleto? ¡No
+								te preocupes! Aquí puedes recuperarlo.</label>
+						</div>
+						<div class="form-group col-md-12">
+							<button type="submit" class="btn btn-success">Recuperar
+								boleto</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</br>
+	</br>
+	</br>
+	<div th:fragment="footer">
+		<div class="panel-footer">
+			<footer class="pie_pagina">
+				<img alt="" src="img/footer.jpg" width="100%" height="80px">
+			</footer>
+		</div>
+		<script type="text/javascript"
+			th:src="@{webjars/jquery/3.4.1/jquery.min.js}"></script>
+		<script type="text/javascript"
+			th:src="@{webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+		<script type="text/javascript"
+			th:src="@{webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</div>
+</body>
+</html>

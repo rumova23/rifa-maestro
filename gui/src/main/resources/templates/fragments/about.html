@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	
+<body>
+<div th:fragment="about">
+ 
+    <section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Toda la informacion que necesitas!</h2>
+                    <hr class="light"/>
+                    <p class="text-faded">En el portal de informacion estadistica podras:
+                    <ul>
+                    	<li>Consultar todos los vales de un asegurado</li>
+                    	<li>Consultar los vales asignadoa a una receta</li>
+                    	<li>Consultar todos lo vales generados en una delegacion</li>
+                    	<li>Consultar todos los vales Surtidos, pendientes de surtir y los vencidos</li>
+                    </ul>
+                    	
+                    	
+                    	
+                    	
+                    </p>
+                    <a th:if="${#authorization.expression('!isAuthenticated()')}" href="/signin" th:href="@{/login}" class="page-scroll btn btn-default btn-xl sr-button">Empezar</a>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

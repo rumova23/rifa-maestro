@@ -1,0 +1,60 @@
+server:
+  port: 8081
+spring:
+  application:
+     name: portal
+  datasource:
+     driverClassName: com.mysql.cj.jdbc.Driver
+     url: jdbc:mysql://localhost:3306/portal?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+     username: portal
+     password: 12345678
+  main:
+     allow-bean-definition-overriding: true
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  boot:
+    admin:
+      client:
+        url: http://localhost:9002/   
+        
+info:
+    component: Portal de Vales de Rifa     
+     
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: false
+    hostname: localhost
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, info, health, beans, caches, conditions, configprops, env, flyway, heapdump, httptrace, integrationgraph, liquibase, logfile, loggers, mappings, metrics, prometheus, scheduledtasks, sessions, shutdown, threaddump
+    
+---
+spring:
+  profiles: prod
+  datasource:
+     driverClassName: com.mysql.cj.jdbc.Driver
+     url: jdbc:mysql://localhost:3306/pergon?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+     username: rifausuario
+     password: UnAcl4v3
+     
+        
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://64.202.187.185:8761/eureka/
+  instance:
+    preferIpAddress: false
+    hostname: 64.202.187.185
