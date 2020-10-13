@@ -46,14 +46,18 @@ public class ServidorPublicoServiceImpl implements ServidorPublicoService{
 	@Override
 	public Resultado obtenListaServidoresPublicos(Filtro filtro, boolean todo) {
 		if(filtro.getEstatus()!=null && filtro.getEstatus().length>0) {
+			boolean entro=false;
 			for(int x=0; x<filtro.getEstatus().length;x++) {
 				if(filtro.getEstatus()[x].equals(0)) {
-					
+					entro=true;
 				}
 			}
 			
-			Integer[] estatus = {0,1,4};
-			filtro.setEstatus(estatus);
+			if(entro) {
+				Integer[] estatus = {0,1,4};
+				filtro.setEstatus(estatus);
+			}
+			
 		}
 		return jdbcRepositorio.getData(filtro, todo);
 	}

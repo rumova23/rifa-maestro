@@ -13,6 +13,8 @@ public interface CatalogoService {
 
 	public List<SubCatalogo> obtenCatalogoZonaEscolar(Integer idRegion);
 
-	List<Catalogo> obtenCatalogoTodo();
+	public List<Catalogo> obtenCatalogoTodo();
+
+	public String obtenZonaEscolar(Short idRegion, String zonaEscolar);
 
 }

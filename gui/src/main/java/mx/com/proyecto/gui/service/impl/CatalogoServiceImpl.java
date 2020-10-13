@@ -2,7 +2,6 @@ package mx.com.proyecto.gui.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -62,5 +61,20 @@ public class CatalogoServiceImpl implements CatalogoService {
 		catalogo = new ArrayList<Catalogo>();
 		catalogo.add(c);
 		return catalogo;
+	}
+
+	@Override
+	@Cacheable("idZona")
+	public String obtenZonaEscolar(Short idRegion, String zonaEscolar) {
+		List<SubCatalogo> reg = obtenCatalogoZonaEscolar(new Integer(idRegion));
+		for(SubCatalogo r : reg) {
+			if(r.getIdSubCatalogo().equals(new Integer(zonaEscolar))) {
+				return r.getDescripcion();
+			}
+		}
+			
+		
+		
+		return null;
 	}
 }

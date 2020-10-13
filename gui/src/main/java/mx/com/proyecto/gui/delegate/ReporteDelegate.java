@@ -11,6 +11,7 @@ import mx.com.proyecto.gui.dto.Resultado;
 import mx.com.proyecto.gui.service.CatalogoService;
 import mx.com.proyecto.gui.service.ServidorPublicoService;
 import mx.com.proyecto.gui.service.TransformToExcel;
+import mx.com.proyecto.servidor.model.ServidorPublico;
 
 @Service
 public class ReporteDelegate {
@@ -32,8 +33,12 @@ public class ReporteDelegate {
 			modelAndView.addObject("resultado", new Resultado());
 			return modelAndView;
 		}
-		
-		modelAndView.addObject("resultado",service.obtenListaServidoresPublicos(filtro, false));
+		Resultado r = service.obtenListaServidoresPublicos(filtro, false);
+				
+		for(ServidorPublico s: r.getLista()) {
+			s.setZonaEscolar(serviceCat.obtenZonaEscolar(s.getIdRegion(), s.getZonaEscolar()));
+		}
+		modelAndView.addObject("resultado",r);
 		return modelAndView;
 	}
 
@@ -50,7 +55,12 @@ public class ReporteDelegate {
 			return null;
 		}
 		
-		return excel.creaExcel(service.obtenListaServidoresPublicos(filtro, true).getLista());
+		Resultado r = service.obtenListaServidoresPublicos(filtro, true);
+		
+		for(ServidorPublico s: r.getLista()) {
+			s.setZonaEscolar(serviceCat.obtenZonaEscolar(s.getIdRegion(), s.getZonaEscolar()));
+		}
+		return excel.creaExcel(r.getLista());
 	
 	}
 }
