@@ -78,18 +78,18 @@
 				
 				<form th:action="@{/maestros}" th:object="${user}" method="get">
 					<div class="text"  th:if="${!#authorization.expression('isAuthenticated()')}">
-						<h1>Gran Rifa del dia del Maestro</h1>
+						<h2>Bienvenido a la rifa del día del Maestro SMSEM 2020.</h2>
 						<br/>
-						<h1>Merecido festejo a todos los Maestros</h1>
+						<h1>Como un reconocimiento a su labor, desempeño, entrega y compromiso.</h1>
 						<br/>
-						<h2>Como un reconocimiento a su labor, desempeño, entrega y compromiso</h2>
+						<h2>Profr. José Manuel Uribe Navarrete<br/>Secretario General</h2>
 						
-						<button type="submit" class="btn btn-success">Entra y elige tu boleto</button>
-						<span>¿Eres Administrador del sistema? <a href="/" th:href="@{/login}">click aqui</a></span>
+						<button type="submit" class="btn btn-success">Entre y elija su boleto</button>
+						<span>¿Eres Administrador del sistema? <a href="/" th:href="@{/login}">click aquí</a></span>
 						
 					</div>
 					<div class="text"  th:if="${#authorization.expression('isAuthenticated()')}">
-						<h1>Gran Rifa del dia del Maestro</h1>
+						<h1>Rifa del día del Maestro</h1>
 						<br/>
 						<h1>Merecido festejo a todos los Maestros</h1>
 						<br/>

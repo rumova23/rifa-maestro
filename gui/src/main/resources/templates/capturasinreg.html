@@ -127,6 +127,7 @@
 					<div class="form-group"	>
 						<label for="idRegion" class="control-label">Región</label> 
 						<select id="idRegion"  th:field="*{idRegion}" class="form-control" required onchange="this.form.submit()">
+							<option value="" selected="selected">Selecciona una opción</option>
 						    <option th:each="item:${regiones}" th:value="${item.idCatalogo}" th:text="${item.descripcion}"/>
 						</select>
 					</div>
@@ -134,6 +135,7 @@
 						<label for="zonaEscolar" class="control-label">Zona Escolar</label> 
 						
 						<select id="zonaEscolar"  th:field="*{zonaEscolar}" class="form-control" required >
+							<option value="" selected="selected">Selecciona una opción</option>
 						    <option th:each="item:${zonasEscolares}" th:value="${item.idSubCatalogo}" th:text="${item.descripcion}"/>
 						</select>
 					</div>
